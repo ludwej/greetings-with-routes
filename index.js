@@ -24,21 +24,24 @@ app.set('view engine', 'handlebars');
 app.use(express.static('public'))
 
 app.get('/', function (req, res) {
-   let greetP = greetings.greetFunction();
-//    let count = greetings.returnNamesLocal();
+   let greetP = greetings.myGreet();
+   let count = greetings.countLocal();
 
     res.render('home', {
-        greetP
-        // count
+        greetP,
+        count
 
     });
   });
   app.post('/greet', function (req, res) {
-    const Xhosa = req.body.Xho;
-    const Afrikaans = req.body.Afri;
-    const English = req.body.Engl
-  
-   
+    const language = req.body.language;
+    const name = req.body.name;
+
+    
+     
+
+    greetgreetings.greetFunction(language,name)
+   console.log(greetgreetings.greetFunction(language,name))
   
     res.redirect('/');
   });

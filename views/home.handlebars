@@ -1,14 +1,17 @@
-<body>
+
   <div class="container">
 
 
     <h2>Greet</h2>
 
     <div class="row">
+     <form action="/greet" method="POST">
       <div class="six columns">
         <label class="">
-              <input type="text" class="Text" value="" placeholder="Your Name">
-              <span class="peopleCount">0</span>
+              <input name="name" type="text" class="Text" value="" placeholder="Your Name"> 
+
+              
+              
               <br>
             <input type="radio" name="languageType" class="language" value="Eng">
             <span class="label-body">English</span>
@@ -21,13 +24,19 @@
               <input type="radio" name="languageType" class="language" value="Afri">
               <span class="label-body" >Afrikaans</span>
             </label>
-            <span class="output" ></span>
 
+            <button class="button-primary GreetBtn" type="submit" name="button">Greet</button>
+</form>
 
-
+            <span class="output" > {{greetP}} </span>
+            <span class="peopleCount">{{count}}</span>
+            
+           
+            
+            
 
             <br>
-        <button class="button-primary GreetBtn" type="button" name="button">Greet</button>
+        
         <button class="button-primary Reset" type="button" name="button">Reset</button>
       </div>
 
@@ -36,8 +45,4 @@
 </div>
 </div>
 
-  </body>
-        <script src="js/greet-logic.js" charset="utf-8"></script>
-        <script src="js/greet.js" charset="utf-8"></script>
 
-</html>
