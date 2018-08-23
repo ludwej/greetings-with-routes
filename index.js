@@ -1,5 +1,6 @@
 let express = require('express')
 let app = express()
+let flash = require('express-flash')
 // let settings = 0;
 // let assert = require('assert')
 let greet = require('/home/codex-admin/projects/greetings-with-routes/greet-logic.js')
