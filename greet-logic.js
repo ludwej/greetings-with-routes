@@ -2,14 +2,14 @@ module.exports = function() {
 
   var stored = {} ;
   var greetings = '' ;
-  // var greetCounter = 0 ;
+  var greetCounter = 0 ;
 
 
 
   function greetFunction(language,name) {
 
     if(name != ''){
-      // nameGreeted = name
+      nameGreeted = name
       if (stored[name]=== undefined) {
         stored[name] =0;
 
@@ -46,11 +46,25 @@ module.exports = function() {
 
   }
 
+  function counting(){
+    return greetCounter;
+  }
+
+
+  function resetBtn(){
+    var stored  = 0;
+    var greetings = 0;
+    greetCounter = 0 ;
+
+  }
+
 
 return {
   greetFunction,
   countLocal,
   returnNamesLocal,
-  myGreet
+  myGreet,
+  resetBtn,
+  counting
 }
 }

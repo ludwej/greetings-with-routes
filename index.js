@@ -24,7 +24,7 @@ app.set('view engine', 'handlebars');
 app.use(express.static('public'))
 
 app.get('/', function (req, res) {
-   let greetP = greetings.myGreet();
+   let greetP = greetings.greetFunction();
    let count = greetings.countLocal();
 
     res.render('home', {
@@ -33,17 +33,27 @@ app.get('/', function (req, res) {
 
     });
   });
+
+
   app.post('/greet', function (req, res) {
     const language = req.body.language;
     const name = req.body.name;
-
-    
      
 
-    greetgreetings.greetFunction(language,name)
-   console.log(greetgreetings.greetFunction(language,name))
+    let greetP = greetings.greetFunction(language,name)
+    let count = greetings.countLocal();
+   console.log(greetings.greetFunction(language,name))
   
-    res.redirect('/');
+    res.render ('home' , {
+        greetP,
+        count
+    });
+  });
+  
+  app.post('/resetBtn', function (req, res) {
+    greetings.resetBtn();
+  
+    res.render('home')
   });
   
 
