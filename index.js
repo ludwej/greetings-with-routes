@@ -1,11 +1,21 @@
 let express = require('express')
 let app = express()
-let flash = require('express-flash')
+let flash = require('express-flash');
+const session = require('express-session');
 // let settings = 0;
 // let assert = require('assert')
 let greet = require('/home/codex-admin/projects/greetings-with-routes/greet-logic.js')
 
 const greetings = greet() ;
+
+app.use(session({
+    secret : "<add a secret string here>",
+    resave: false,
+    saveUninitialized: true
+  }));
+
+  // initialise the flash middleware
+  app.use(flash());
 
 var exphbs = require('express-handlebars')
 var bodyParser = require('body-parser')
@@ -39,6 +49,20 @@ app.get('/', function (req, res) {
   app.post('/greet', function (req, res) {
     const language = req.body.language;
     const name = req.body.name;
+
+    if (name === '' ) {
+        req.flash('info', 'Please Enter a Name')
+        
+      }
+      else if(language == null){
+        req.flash('info', 'Please Select Language')
+      }
+      
+      else {
+        greetings.greetFunction(language,name)
+       
+      }
+    
      
 
     let greetP = greetings.greetFunction(language,name)
