@@ -85,5 +85,5 @@ app.get('/', function (req, res) {
 let PORT = process.env.PORT || 3010;
 
 app.listen(PORT, function(){
-  console.log('App starting on port', PORT);
+  // console.log('App starting on port', PORT);
 });
