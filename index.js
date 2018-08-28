@@ -49,12 +49,17 @@ app.get('/', function (req, res) {
     const language = req.body.language;
     const name = req.body.name;
 
-    if (name === '' ) {
-        req.flash('info', 'Please Enter a Name')
-        
-      }
+    if (name === '' && language == null ){
+      req.flash('info', 'Please Enter Name & Select Language')
+    }
+
       else if(language == null){
         req.flash('info', 'Please Select Language')
+      }
+
+      else if(name === '' ) {
+        req.flash('info', 'Please Enter a Name')
+        
       }
       
       else {
