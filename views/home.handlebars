@@ -8,7 +8,7 @@
      <form action="/greet" method="POST">
       <div class="six columns">
         <label class="">
-              <input name="name" type="text" class="Text" value="" placeholder="Your Name"> 
+              <input name="name" type="text" class="Text" value="" placeholder="Your Name"  > 
               
               <br>
             <input type="radio" name="language" class="language" value="Eng">
@@ -26,7 +26,13 @@
             <button class="button-primary GreetBtn" type="submit" name="button">Greet</button>
 </form>
 
-            <span class="{{greetP}}">  </span>
+
+<form action="/resetBtn" method="POST">
+                <button class="button-primary" type="submit" name="button">Reset</button>
+              
+              </form>
+
+            <span class="output">  {{greetP}} </span>
             <span class="peopleCount"> {{count}}</span>
             
            
@@ -39,10 +45,7 @@
 
             <br>
         
-       <form action="/resetBtn" method="POST">
-                <button class="button-primary" type="submit" name="button">Reset</button>
-              
-              </form>
+       <a href="/usergreet">Users greeted</a>
       </div>
 
     </div>

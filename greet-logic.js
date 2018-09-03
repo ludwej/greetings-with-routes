@@ -52,9 +52,9 @@ module.exports = function() {
 
 
   function resetBtn(){
-    var stored  = {} ;
-    var greetings = '';
-    greetCounter = 0 ;
+    var stored = {} ;
+    var greetings = '' ;
+    var greetCounter = 0 ;
 
   }
 

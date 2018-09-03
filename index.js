@@ -2,11 +2,17 @@ let express = require('express')
 let app = express()
 let flash = require('express-flash');
 const session = require('express-session');
+const pg = require("pg");
+const Pool = pg.Pool;
+
+// we are using a special test database for the tests
+const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432';
+
 // let settings = 0;
 // let assert = require('assert')
 let greet = require('/home/codex-admin/projects/greetings-with-routes/greet-logic.js')
 
-const greetings = greet() ;
+const greetings = greet();
 
 app.use(session({
     secret : "<add a secret string here>",
@@ -53,14 +59,17 @@ app.get('/', function (req, res) {
       req.flash('info', 'Please Enter Name & Select Language')
     }
 
+    else if(name === '' ) {
+      req.flash('info', 'Please Enter a Name')
+      
+    }
+
+
       else if(language == null){
         req.flash('info', 'Please Select Language')
       }
 
-      else if(name === '' ) {
-        req.flash('info', 'Please Enter a Name')
-        
-      }
+     
       
       else {
         greetings.greetFunction(language,name)
@@ -85,6 +94,14 @@ app.get('/', function (req, res) {
     res.render('home')
   });
   
+  app.get('/usergreet', function (req, res) {
+  
+ 
+     res.render('greeted', {
+
+ 
+     });
+   });
 
 let PORT = process.env.PORT || 3010;
 
