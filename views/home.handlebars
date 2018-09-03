@@ -1,56 +1,54 @@
+<div class="container">
 
-  <div class="container">
 
+  <h2>Greet</h2>
 
-    <h2>Greet</h2>
-
-    <div class="row">
-     <form action="/greet" method="POST">
+  <div class="row">
+    <form action="/greet" method="POST">
       <div class="six columns">
         <label class="">
-              <input name="name" type="text" class="Text" value="" placeholder="Your Name"  > 
-              
-              <br>
-            <input type="radio" name="language" class="language" value="Eng">
-            <span class="label-body">English</span>
-          </label>
+          <input name="name" type="text" class="Text" value="" placeholder="Your Name">
+
+          <br>
+          <input type="radio" name="language" class="language" value="Eng">
+          <span class="label-body">English</span>
+        </label>
         <label class="">
-            <input type="radio" name="language" class="language" value="Xho">
-            <span class="label-body" >Isixhosa</span>
-          </label>
-          <label class="">
-              <input type="radio" name="language" class="language" value="Afri">
-              <span class="label-body" >Afrikaans</span>
-            </label>
+          <input type="radio" name="language" class="language" value="Xho">
+          <span class="label-body">Isixhosa</span>
+        </label>
+        <label class="">
+          <input type="radio" name="language" class="language" value="Afri">
+          <span class="label-body">Afrikaans</span>
+        </label>
 
-            <button class="button-primary GreetBtn" type="submit" name="button">Greet</button>
-</form>
+        <button class="button-primary GreetBtn" type="submit" name="button">Greet</button>
+    </form>
 
 
-<form action="/resetBtn" method="POST">
-                <button class="button-primary" type="submit" name="button">Reset</button>
-              
-              </form>
+    {{!--
+    <form action="/resetBtn" method="POST">
+      <button class="button-primary" type="submit" name="button">Reset</button>
 
-            <span class="output">  {{greetP}} </span>
-            <span class="peopleCount"> {{count}}</span>
-            
-           
-            {{#if messages.info}}
-<div class="entry">
-    <h1> {{messages.info}}</h1>
-</div>
-{{/if}}
-            
+    </form> --}}
 
-            <br>
-        
-       <a href="/usergreet">Users greeted</a>
-      </div>
+    <span class="output"> {{greetP}} </span>
+    <span class="peopleCount"> {{count}}</span>
 
+
+    {{#if messages.info}}
+    <div class="entry">
+      <h1> {{messages.info}}</h1>
+    </div>
+    {{/if}}
+
+
+    <br>
+
+    <a href="/greeted">Users greeted</a>
     </div>
 
+  </div>
+
 </div>
 </div>
-
-
