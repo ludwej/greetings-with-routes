@@ -66,30 +66,30 @@ app.get('/', async function (req, res) {
     const language = req.body.language;
     const name = req.body.name;
 
-    if (name !== undefined) {
-      await pool.query('insert into users (user_name, count) values ($1, $2)', [name, 1]);
-      greet.greetFunction(name, language);
-    }
-    if (name === '' && language == undefined ){
-      req.flash('info', 'Please Enter Name & Select Language')
-    }
+    //if (name !== undefined) {
+     //await pool.query('insert into users (user_name, count) values ($1, $2)', [name, 1]);
+     // await greet.greetFunction(language, name);
+    // }
+    // if (name === '' && language == undefined ){
+    //   req.flash('info', 'Please Enter Name & Select Language')
+    // }
 
-    else if(name === '' ) {
-      req.flash('info', 'Please Enter a Name')
+    // else if(name === '' ) {
+    //   req.flash('info', 'Please Enter a Name')
       
-    }
+    // }
 
 
-      else if(language == undefined){
-        req.flash('info', 'Please Select Language')
-      }
+    //   else if(language == undefined){
+    //     req.flash('info', 'Please Select Language')
+    //   }
 
      
       
-      else {
-        greet.greetFunction(language,name)
+    //   else {
+    //     greet.greetFunction(language,name)
        
-      }
+    //   }
     
 
       let greetings = { 
@@ -97,23 +97,34 @@ app.get('/', async function (req, res) {
         count : await greet.countLocal()
       }
 
-     
-    let count = await greet.countLocal();
-  
+     console.log(greetings)
+
+  //   let greetP = greetings.greetFunction(language,name)
+  //   let count = greetings.countLocal();
+  //  console.log(greetings.greetFunction(language,name))
   
     res.render ('home' , {
-      count,
       greetings
     });
   });
   
+
+  app.post('/home',async function (req, res) {
+
+
+    res.render('home')
+  });
+
+
   app.post('/resetBtn',async function (req, res) {
     let deleteUsers = await pool.query('delete from users;')
-    let deleteId = await pool.query('delete from id serial;')
+   
 
 
-    res.render('home', {deleteUsers,deleteId})
+    res.render('greeted', {deleteUsers})
   });
+
+  
   
   app.get('/greeted', async function (req, res) {
     let results = await pool.query('select * from users;')
