@@ -1,17 +1,20 @@
 <div class='container'>
     <h1>People Greeted</h1>
+    
 
-    <table>
+      <table>
         <tr>
-            <th>
-                Names
-            </th>
+            <th>id</th>
+            <th>users greeted</th>
+            <th>how many times</th>
         </tr>
         {{#each greetedUser}}
-            <tr>
-                <td>
-                  <a href="http:/"> {{user_name}} </a>  has been greeted
-                </td>
-            </tr>
+        <tr>
+            <td>{{id}}</td>
+            <td>{{user_name}}</td>
+            <td>{{count}}</td>
+        </tr>
         {{/each}}
+
     </table>
+</div>

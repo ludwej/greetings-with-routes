@@ -12,16 +12,15 @@ const pool = new Pool({
   host : 'localhost',
   password : 'code321' ,
   port : 5432
-  
   })
 // we are using a special test database for the tests
 // const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432';
 
 // let settings = 0;
 // let assert = require('assert')
-let greet = require('/home/codex-admin/projects/greetings-with-routes/greet-logic.js')
+let greeting = require('/home/codex-admin/projects/greetings-with-routes/greet-logic.js')
 
-const greetings = greet();
+let greet = greeting(pool);
 
 app.use(session({
     secret : "<add a secret string here>",
@@ -49,12 +48,15 @@ app.set('view engine', 'handlebars');
 app.use(express.static('public'))
 
 app.get('/', async function (req, res) {
-   let greetP = greetings.greetFunction();
-   let count = greetings.countLocal();
+  
+  
+  
+  // let greetP = greetings.greetFunction();
+   let count = await pool.query('select count(user_name) from users;')
+   let counter = count.rows[0].count
 
     res.render('home', {
-        greetP,
-        count
+      counter
 
     });
   });
@@ -66,7 +68,7 @@ app.get('/', async function (req, res) {
 
     if (name !== undefined) {
       await pool.query('insert into users (user_name, count) values ($1, $2)', [name, 1]);
-      greetings.greetFunction(name, language);
+      greet.greetFunction(name, language);
     }
     if (name === '' && language == undefined ){
       req.flash('info', 'Please Enter Name & Select Language')
@@ -85,34 +87,49 @@ app.get('/', async function (req, res) {
      
       
       else {
-        greetings.greetFunction(language,name)
+        greet.greetFunction(language,name)
        
       }
     
-     
 
-    let greetP = greetings.greetFunction(language,name)
-    let count = greetings.countLocal();
-   console.log(greetings.greetFunction(language,name))
+      let greetings = { 
+        message : await greet.greetFunction(language, name) ,
+        count : await greet.countLocal()
+      }
+
+     
+    let count = await greet.countLocal();
+  
   
     res.render ('home' , {
-        greetP,
-        count
+      count,
+      greetings
     });
   });
   
-  // app.post('/resetBtn', function (req, res) {
-  //   greetings.resetBtn();
-  
-  //   res.render('home')
-  // });
+  app.post('/resetBtn',async function (req, res) {
+    let deleteUsers = await pool.query('delete from users;')
+    let deleteId = await pool.query('delete from id serial;')
+
+
+    res.render('home', {deleteUsers,deleteId})
+  });
   
   app.get('/greeted', async function (req, res) {
     let results = await pool.query('select * from users;')
-    let greetedUser = results.rows;
+    let greetedUser = results.rows
+
+    let counter = await greet.countLocal()
  
-     res.render('greeted', { greetedUser });
+
+      console.log(counter)
+    
+     res.render('greeted', { greetedUser, counter});
    });
+
+  
+ 
+
 
 let PORT = process.env.PORT || 3010;
 
