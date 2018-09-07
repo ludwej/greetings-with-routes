@@ -6,7 +6,7 @@ module.exports = function (pool) {
 
   async function greetFunction(language, name) {
 
-    //if (name != '' && language === undefined) {
+    if (name != '' && language !== undefined) {
 
       // if (stored[name] === undefined) {
       //   stored[name] = 0;
@@ -30,8 +30,8 @@ module.exports = function (pool) {
         if (language === 'Afri') {
           return 'Halo, ' + name;
         }
-      //}
-    //}
+      
+    }
   }
 
   function myGreet() {
@@ -45,10 +45,10 @@ module.exports = function (pool) {
   }
 
 
-  function returnNamesLocal() {
-    return stored;
+  // function returnNamesLocal() {
+  //   return stored;
 
-  }
+  // }
 
 
 

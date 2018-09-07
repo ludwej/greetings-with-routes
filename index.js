@@ -80,9 +80,9 @@ app.get('/', async function (req, res) {
     }
 
 
-    //   else if(language == undefined){
-    //     req.flash('info', 'Please Select Language')
-    //   }
+      else if(language == undefined){
+        req.flash('info', 'Please Select Language')
+      }
 
      
       
@@ -116,7 +116,7 @@ app.get('/', async function (req, res) {
   });
 
 
-  app.post('/resetBtn',async function (req, res) {
+  app.post('/resetDB', async function (req, res) {
     let deleteUsers = await pool.query('delete from users;')
    
 
