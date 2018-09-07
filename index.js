@@ -70,14 +70,14 @@ app.get('/', async function (req, res) {
      //await pool.query('insert into users (user_name, count) values ($1, $2)', [name, 1]);
      // await greet.greetFunction(language, name);
     // }
-    // if (name === '' && language == undefined ){
-    //   req.flash('info', 'Please Enter Name & Select Language')
-    // }
+    if (name === '' && language == undefined ){
+      req.flash('info', 'Please Enter Name & Select Language')
+    }
 
-    // else if(name === '' ) {
-    //   req.flash('info', 'Please Enter a Name')
+    else if(name === '' ) {
+      req.flash('info', 'Please Enter a Name')
       
-    // }
+    }
 
 
     //   else if(language == undefined){
@@ -97,7 +97,7 @@ app.get('/', async function (req, res) {
         count : await greet.countLocal()
       }
 
-     console.log(greetings)
+   
 
   //   let greetP = greetings.greetFunction(language,name)
   //   let count = greetings.countLocal();
