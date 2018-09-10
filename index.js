@@ -117,7 +117,7 @@ app.get('/', async function (req, res) {
 
 
   app.post('/resetDB', async function (req, res) {
-    let deleteUsers = await pool.query('delete from users;')
+    let deleteUsers = await greet.resetBtn()
    
 
 

@@ -53,12 +53,9 @@ module.exports = function (pool) {
 
 
 
-  // function resetBtn() {
-  //   var stored = {};
-  //   var greetings = '';
-  //   var greetCounter = 0;
-
-  // }
+  async function resetBtn() {
+    reset = await pool.query('delete from users;')
+  }
 
 
   return {
@@ -66,7 +63,7 @@ module.exports = function (pool) {
     countLocal,
     // returnNamesLocal,
     myGreet,
-    // resetBtn,
+    resetBtn,
     // counting
   }
 }

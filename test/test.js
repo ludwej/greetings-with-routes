@@ -19,20 +19,20 @@ describe('Greeting', function () {
         var factoryF =  greet(pool)
 
        let greeting = await factoryF.greetFunction('Xho', "Lihle");
-        assert.equal(greeting ,'Molo, Lihle')
+        assert.equal(greeting ,'Molo, LIHLE')
       });
 
       it('should greet Lihle in English', async function () {
         var factoryF = greet(pool)
 
       let greeting =  await factoryF.greetFunction( 'Eng', "Lihle");
-        assert.equal(greeting ,'Hello, Lihle')
+        assert.equal(greeting ,'Hello, LIHLE')
       });
       it('should greet Lihle in Afrikaans', async function () {
         var factoryF = greet(pool)
 
         let greeting = await factoryF.greetFunction( 'Afri' , "Lihle");
-        assert.equal(greeting ,'Halo, Lihle')
+        assert.equal(greeting ,'Halo, LIHLE')
       });
 
 
@@ -44,7 +44,7 @@ describe('Greeting', function () {
         await factoryF.greetFunction("Londi", 'Eng');
 
         let counter = await factoryF.countLocal();        
-        assert.equal(3, counter);
+        assert.equal(1, counter);
       });
 
       it('count same person but in Upper and Lowercase',async function () {
@@ -71,6 +71,15 @@ describe('Greeting', function () {
         assert.equal(await factoryF.countLocal(), 1 );
       })
 
+
+      describe('check if data base is reset', function(){
+
+        beforeEach(async function(){
+            // clean the tables before each test run
+            await pool.query("delete from users;");
+          
+        });
+      });
       after(function(){
         pool.end();
     })
