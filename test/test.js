@@ -39,9 +39,12 @@ describe('Greeting', function () {
       it('should count how many people greeted', async function () {
         var factoryF = greet(pool)
 
+        await factoryF.greetFunction("Amand", 'Afri');
+        await factoryF.greetFunction("Aphiwe", 'Xho');
+        await factoryF.greetFunction("Londi", 'Eng');
 
-
-        
+        let counter = await factoryF.countLocal();        
+        assert.equal(3, counter);
       });
 
       it('count same person but in Upper and Lowercase',async function () {

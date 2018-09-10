@@ -5,6 +5,7 @@ module.exports = function (pool) {
   // var greetCounter = 0;
 
   async function greetFunction(language, name) {
+    name = name.toUpperCase() ;
 
     if (name != '' && language !== undefined) {
 
@@ -40,8 +41,8 @@ module.exports = function (pool) {
 
   async function countLocal(counter) {
     let counting = await pool.query('select count(*) from users')
-    let nameRows = counting.rows
-    return nameRows.length
+    let nameRows = counting;
+    return nameRows.rowCount;
   }
 
 
