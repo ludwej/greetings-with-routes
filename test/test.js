@@ -6,13 +6,14 @@ const pg = require("pg");
 const Pool = pg.Pool;
 
 
+
+// we are using a special test database for the tests
+const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432/greeted';
+
 const pool = new Pool({
-  database : 'greeted',
-  user : 'codex-admin',
-  host : 'localhost',
-  password : 'code321' ,
-  port : 5432
-  })
+    connectionString
+});
+
 
 describe('Greeting', function () {
       it('should greet Lihle in Xhosa', async function () {
