@@ -5,7 +5,8 @@ module.exports = function (pool) {
   // var greetCounter = 0;
 
   async function greetFunction(language, name) {
-    name = name.toUpperCase() ;
+    try{
+      name = name.toUpperCase() ;
 
     if (name != '' && language !== undefined) {
 
@@ -33,6 +34,11 @@ module.exports = function (pool) {
         }
       
     }
+    }
+    catch(err){
+
+    }
+    
   }
 
   function myGreet() {
@@ -40,9 +46,12 @@ module.exports = function (pool) {
   }
 
   async function countLocal(counter) {
-    let counting = await pool.query('select count(user_name) from users')
+    try{
+      let counting = await pool.query('select count(user_name) from users')
     let nameRows = counting;
     return nameRows.rowCount;
+    }
+    catch(err){}
   }
 
 
@@ -54,7 +63,10 @@ module.exports = function (pool) {
 
 
   async function resetBtn() {
-    reset = await pool.query('delete from users;')
+    try{
+      reset = await pool.query('delete from users;')
+    }
+    catch(err){}
   }
 
 
