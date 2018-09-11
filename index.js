@@ -48,22 +48,25 @@ app.set('view engine', 'handlebars');
 app.use(express.static('public'))
 
 app.get('/', async function (req, res) {
-  
-  
-  
-  // let greetP = greetings.greetFunction();
-   let count = await pool.query('select count(user_name) from users;')
-   let counter = count.rows[0].count
+  try{
+ // let greetP = greetings.greetFunction();
+ let count = await pool.query('select count(user_name) from users;')
+ let counter = count.rows[0].count
 
-    res.render('home', {
-      counter
+  res.render('home', {
+    counter
 
-    });
+  });
+  }
+  catch(err){}
+  
+ 
   });
 
 
   app.post('/greet', async function (req, res) {
-    const language = req.body.language;
+    try{
+      const language = req.body.language;
     const name = req.body.name;
 
     //if (name !== undefined) {
@@ -106,6 +109,10 @@ app.get('/', async function (req, res) {
     res.render ('home' , {
       greetings
     });
+    }
+    catch(err){
+
+    }
   });
   
 
@@ -127,7 +134,8 @@ app.get('/', async function (req, res) {
   
   
   app.get('/greeted', async function (req, res) {
-    let results = await pool.query('select * from users;')
+    try{
+      let results = await pool.query('select * from users;')
     let greetedUser = results.rows
 
     let counter = await greet.countLocal()
@@ -136,6 +144,8 @@ app.get('/', async function (req, res) {
       console.log(counter)
     
      res.render('greeted', { greetedUser, counter});
+    }
+    catch(err){}
    });
 
   
