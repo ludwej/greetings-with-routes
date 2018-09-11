@@ -40,7 +40,7 @@ module.exports = function (pool) {
   }
 
   async function countLocal(counter) {
-    let counting = await pool.query('select count(*) from users')
+    let counting = await pool.query('select count(user_name) from users')
     let nameRows = counting;
     return nameRows.rowCount;
   }

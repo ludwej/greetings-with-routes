@@ -73,7 +73,7 @@ describe('Greeting', function () {
       })
 
 
-      describe('check if data base is reset', function(){
+      it('check if data base is reset', function(){
 
         beforeEach(async function(){
             // clean the tables before each test run
