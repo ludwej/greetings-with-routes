@@ -6,19 +6,21 @@ const pg = require("pg");
 const Pool = pg.Pool;
 
 
-const pool = new Pool({
-  database : 'greeted',
-  user : 'codex-admin',
-  host : 'localhost',
-  password : 'code321' ,
-  port : 5432
-  })
-// we are using a special test database for the tests
-// const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432';
+let useSSL = false;
+let local = process.env.LOCAL || false;
+if (process.env.DATABASE_URL && !local){
+    useSSL = true;
+}
+// which db connection to use
+const connectionString = process.env.DATABASE_URL || 'postgresql://codex-admin:code321@localhost:5432/greeted';
 
-// let settings = 0;
-// let assert = require('assert')
-let greeting = require('../greet-logic.js')
+const pool = new Pool({
+    connectionString,
+    ssl : useSSL
+  });
+
+
+let greeting = require('./greet-logic.js')
 
 let greet = greeting(pool);
 
@@ -157,3 +159,19 @@ let PORT = process.env.PORT || 3010;
 app.listen(PORT, function(){
   console.log('App starting on port', PORT);
 });
+
+
+
+
+// const pool = new Pool({
+//   database : 'greeted',
+//   user : 'codex-admin',
+//   host : 'localhost',
+//   password : 'code321' ,
+//   port : 5432
+//   })
+// // we are using a special test database for the tests
+// const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432';
+
+// let settings = 0;
+// let assert = require('assert')
