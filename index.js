@@ -97,7 +97,7 @@ app.get('/', async function (req, res) {
 
       let greetings = { 
         message : await greet.greetFunction(language, name) ,
-        count : await greet.countLocal()
+        count : await greet.greetsCounted()
       }
 
    

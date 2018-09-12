@@ -69,7 +69,7 @@ describe('Greeting', function () {
         await factoryF.greetFunction("", '');
 
 
-        assert.equal(await factoryF.countLocal(), 1 );
+        assert.equal(await factoryF.countLocal(), 0 );
       })
 
 

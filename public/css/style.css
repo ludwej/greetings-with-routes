@@ -10,6 +10,12 @@ body{
 
   background-image: url('pictures/caryle-barton-56255-unsplash.jpg');
 
-  width: auto;
+  width:50%;
 
+}
+
+.entry {
+  color: #D8000C;
+  background-color: #FFD2D2;
+  text-align: center;
 }

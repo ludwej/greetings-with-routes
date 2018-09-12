@@ -55,10 +55,11 @@ module.exports = function (pool) {
   }
 
 
-  // function returnNamesLocal() {
-  //   return stored;
+  async function greetsCounted() {
+    let namesCounted = await pool.query('select * from users')
+    return namesCounted.rowCount;
 
-  // }
+  }
 
 
 
@@ -73,7 +74,7 @@ module.exports = function (pool) {
   return {
     greetFunction,
     countLocal,
-    // returnNamesLocal,
+    greetsCounted,
     myGreet,
     resetBtn,
     // counting
