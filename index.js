@@ -133,6 +133,15 @@ app.get('/', async function (req, res) {
     res.render('greeted', {deleteUsers})
   });
 
+
+  app.post('/reset', async function (req, res) {
+    let deleteUsers = await greet.resetBtn()
+   
+
+
+    res.render('home', {deleteUsers})
+  });
+
   
   
   app.get('/greeted', async function (req, res) {
