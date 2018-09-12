@@ -18,7 +18,7 @@ const pool = new Pool({
 
 // let settings = 0;
 // let assert = require('assert')
-let greeting = require('./greet-logic.js')
+let greeting = require('../greet-logic.js')
 
 let greet = greeting(pool);
 

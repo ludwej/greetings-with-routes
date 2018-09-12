@@ -56,9 +56,12 @@ module.exports = function (pool) {
 
 
   async function greetsCounted() {
-    let namesCounted = await pool.query('select * from users')
+    try{
+      let namesCounted = await pool.query('select * from users')
     return namesCounted.rowCount;
-
+  }
+    
+  catch(err){}
   }
 
 
