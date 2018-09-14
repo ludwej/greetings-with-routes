@@ -1,5 +1,5 @@
 module.exports = function (pool) {
-  async function greetFunction(language, name) {
+  async function greetFunction (language, name) {
     try {
       name = name.toUpperCase()
 
@@ -28,7 +28,7 @@ module.exports = function (pool) {
     }
   }
 
-  async function countLocal(counter) {
+  async function countLocal (counter) {
     try {
       let counting = await pool.query('select count(user_name) from users')
       let nameRows = counting
@@ -36,14 +36,14 @@ module.exports = function (pool) {
     } catch (err) {}
   }
 
-  async function greetsCounted() {
+  async function greetsCounted () {
     try {
       let namesCounted = await pool.query('select * from users')
       return namesCounted.rowCount
     } catch (err) {}
   }
 
-  async function resetBtn() {
+  async function resetBtn () {
     try {
       await pool.query('delete from users;')
     } catch (err) {}
