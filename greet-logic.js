@@ -1,85 +1,66 @@
 module.exports = function (pool) {
-
-  // var stored = {};
-  // var greetings = '';
-  // var greetCounter = 0;
-
   async function greetFunction(language, name) {
-    try{
-      name = name.toUpperCase() ;
+    try {
+      name = name.toUpperCase()
 
-    if (name != '' && language !== undefined) {
-
-      // if (stored[name] === undefined) {
-      //   stored[name] = 0;
-
-        let names = await pool.query('SELECT * FROM users WHERE user_name = $1 ', [name]);
-        console.log(names)
+      if (name !== '' && language !== undefined) {
+        let names = await pool.query('SELECT * FROM users WHERE user_name = $1 ', [name])
 
         if (names.rowCount === 0) {
-          await pool.query('INSERT into users (user_name, count) values($1, $2)', [name, 0]);
-        } 
-        
-          await pool.query('update users set count=count+1 where user_name=$1', [name])
-      
+          await pool.query('INSERT into users (user_name, count) values($1, $2)', [name, 0])
+        }
+
+        await pool.query('update users set count=count+1 where user_name=$1', [name])
+
         if (language === 'Eng') {
-          return 'Hello, ' + name;
+          return 'Hello, ' + name
         }
 
         if (language === 'Xho') {
-          return 'Molo, ' + name;
+          return 'Molo, ' + name
         }
         if (language === 'Afri') {
-          return 'Halo, ' + name;
+          return 'Halo, ' + name
         }
-      
-    }
-    }
-    catch(err){
+      }
+    } catch (err) {
 
     }
-    
-  }
-
-  function myGreet() {
-    return greetings;
   }
 
   async function countLocal(counter) {
-    try{
+    try {
       let counting = await pool.query('select count(user_name) from users')
-    let nameRows = counting;
-    return nameRows.rowCount;
-    }
-    catch(err){}
+      let nameRows = counting
+      return nameRows.rows[0].count
+    } catch (err) {}
   }
-
 
   async function greetsCounted() {
-    try{
+    try {
       let namesCounted = await pool.query('select * from users')
-    return namesCounted.rowCount;
+      return namesCounted.rowCount
+    } catch (err) {}
   }
-    
-  catch(err){}
-  }
-
-
 
   async function resetBtn() {
-    try{
-      reset = await pool.query('delete from users;')
-    }
-    catch(err){}
+    try {
+      await pool.query('delete from users;')
+    } catch (err) {}
   }
 
+  async function ReadUser (username) {
+    let result = await pool.query('SELECT * FROM users WHERE user_name=$1', [username])
+    return result.rows
+  }
 
   return {
     greetFunction,
     countLocal,
     greetsCounted,
-    myGreet,
     resetBtn,
+    ReadUser
+
     // counting
   }
 }

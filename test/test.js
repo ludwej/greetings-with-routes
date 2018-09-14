@@ -8,7 +8,7 @@ const Pool = pg.Pool;
 
 
 // we are using a special test database for the tests
-const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432/greeted';
+const connectionString = process.env.DATABASE_URL || 'postgresql://codex-admin:code321@localhost:5432/greeted';
 
 const pool = new Pool({
     connectionString
@@ -19,7 +19,7 @@ describe('Greeting', function () {
       it('should greet Lihle in Xhosa', async function () {
         var factoryF =  greet(pool)
 
-       let greeting = await factoryF.greetFunction('Xho', "Lihle");
+       let greeting = await factoryF.greetFunction( 'Xho', "Lihle" );
         assert.equal(greeting ,'Molo, LIHLE')
       });
 
