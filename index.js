@@ -47,8 +47,7 @@ app.use(express.static('public'))
 
 app.get('/', async function (req, res) {
   try {
-    let count = await pool.query('select count(user_name) from users;')
-    let counter = count.rows[0].count
+    let counter = await greet.count()
 
     res.render('home', {
       counter
@@ -117,8 +116,7 @@ app.post('/reset', async function (req, res) {
 
 app.get('/greeted', async function (req, res) {
   try {
-    let results = await pool.query('select * from users;')
-    let greetedUser = results.rows
+    let greetedUser = await greet.greetedUser()
 
     let counter = await greet.countLocal()
 

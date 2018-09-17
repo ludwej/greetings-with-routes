@@ -1,6 +1,12 @@
+<div class='container' style="background-color: grey ;">
 <h1> How many times greeted</h1>
-<div class="box">
+
+<form action="/home" method="POST">
+      <button class="button-primary" type="submit" name="button">Home</button> </form>
+
     {{#each time}} 
     <h5> {{user_name}} has been greeted {{count}} time(s)</h5> 
     {{/each}}
+
+
 </div>

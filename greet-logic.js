@@ -49,6 +49,16 @@ module.exports = function (pool) {
     } catch (err) {}
   }
 
+  async function greetedUser () {
+    let results = await pool.query('select * from users;')
+    return results.rows
+  }
+
+  async function count () {
+    let count = await pool.query('select count(user_name) from users;')
+    return count.rows[0].count
+  }
+
   async function ReadUser (username) {
     let result = await pool.query('SELECT * FROM users WHERE user_name=$1', [username])
     return result.rows
@@ -59,6 +69,8 @@ module.exports = function (pool) {
     countLocal,
     greetsCounted,
     resetBtn,
+    greetedUser,
+    count,
     ReadUser
 
     // counting
