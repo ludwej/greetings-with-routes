@@ -46,11 +46,12 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 
 app.get('/', async function (req, res) {
-  let count = await greet.count()
-  let message = await greet.greetedUser()
+  let greetings = {
+    message: await greet.greetFunction(),
+    count: await greet.greetsCounted()
+  }
   res.render('home', {
-    count,
-    message
+    greetings
 
   })
 })
