@@ -19,6 +19,9 @@ const pool = new Pool({
 })
 
 let greeting = require('./greet-logic.js')
+let routing = require('./routes/routes.js')
+
+let routes = routing(pool)
 
 let greet = greeting(pool)
 
@@ -45,93 +48,18 @@ app.set('view engine', 'handlebars')
 
 app.use(express.static('public'))
 
-app.get('/', async function (req, res) {
-  let greetings = {
-    message: await greet.greetFunction(),
-    count: await greet.greetsCounted()
-  }
-  res.render('home', {
-    greetings
+app.get('/', routes.homeRoute)
 
-  })
-})
+app.get('/names/:user_name', routes.usesGreeted)
 
-app.get('/names/:user_name', async function (req, res) {
-  try {
-    let username = req.params.user_name
-    let results = await greet.ReadUser(username)
-    res.render('namesGreeted', {
-      time: results
-    })
-  } catch (err) {
-    res.send(err.stack)
-  }
-})
+app.post('/greet', routes.greetingF)
 
-app.post('/greet', async function (req, res) {
-  try {
-    const language = req.body.language
-    const name = req.body.name
+app.post('/home', routes.home)
+app.post('/resetDB', routes.resetDb)
 
-    if (name === '' && language === undefined) {
-      req.flash('info', 'Please Enter Name & Select Language')
-    } else if (name === '') {
-      req.flash('info', 'Please Enter a Name')
-    } else if (language === undefined) {
-      req.flash('info', 'Please Select Language')
-    }
+app.post('/reset', routes.reset)
 
-    let greetings = {
-      message: await greet.greetFunction(language, name),
-      count: await greet.greetsCounted()
-    }
-
-    res.render('home', {
-      greetings
-    })
-  } catch (err) {
-
-  }
-})
-
-app.post('/home', async function (req, res) {
-  let greetings = {
-    // message: await greet.greetFunction(language, name),
-    count: await greet.greetsCounted()
-  }
-  res.render('home', {
-    greetings
-
-  })
-})
-app.post('/resetDB', async function (req, res) {
-  let deleteUsers = await greet.resetBtn()
-
-  res.render('greeted', {
-    deleteUsers
-  })
-})
-
-app.post('/reset', async function (req, res) {
-  let deleteUsers = await greet.resetBtn()
-
-  res.render('home', {
-    deleteUsers
-  })
-})
-
-app.get('/greeted', async function (req, res) {
-  try {
-    let greetedUser = await greet.greetedUser()
-
-    let counter = await greet.countLocal()
-
-    res.render('greeted', {
-      greetedUser,
-      counter
-    })
-  } catch (err) {}
-})
+app.get('/greeted', routes.greeted)
 
 let PORT = process.env.PORT || 3010
 
