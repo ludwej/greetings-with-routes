@@ -46,14 +46,13 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 
 app.get('/', async function (req, res) {
-  try {
-    let counter = await greet.count()
+  let count = await greet.count()
+  let message = await greet.greetedUser()
+  res.render('home', {
+    count,
+    message
 
-    res.render('home', {
-      counter
-
-    })
-  } catch (err) {}
+  })
 })
 
 app.get('/names/:user_name', async function (req, res) {
@@ -95,9 +94,15 @@ app.post('/greet', async function (req, res) {
 })
 
 app.post('/home', async function (req, res) {
-  res.render('home')
-})
+  let greetings = {
+    // message: await greet.greetFunction(language, name),
+    count: await greet.greetsCounted()
+  }
+  res.render('home', {
+    greetings
 
+  })
+})
 app.post('/resetDB', async function (req, res) {
   let deleteUsers = await greet.resetBtn()
 

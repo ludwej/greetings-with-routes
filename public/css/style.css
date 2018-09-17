@@ -17,3 +17,7 @@ body{
   background-color: #FFD2D2;
   text-align: center;
 }
+.inline{
+  display: inline;
+  
+}

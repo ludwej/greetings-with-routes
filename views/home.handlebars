@@ -6,18 +6,16 @@
   <div class="row">
     <form action="/greet" method="POST">
       <div class="six columns">
-        <label class="">
-          <input name="name" type="text" class="Text" value="" placeholder="Your Name"> <span class="peopleCount"> Count:</span>  {{greetings.count}}
-
-          <br>
+        <label class="radio inline">
+          <input name="name" type="text" class="Text" value="" placeholder="Your Name">  Count:{{greetings.count}}       <br>
           <input type="radio" name="language" class="language" value="Eng">
           <span class="label-body">English</span>
         </label>
-        <label class="">
+        <label class="radio inline">
           <input type="radio" name="language" class="language" value="Xho">
           <span class="label-body">Isixhosa</span>
         </label>
-        <label class="">
+        <label class="radio inline">
           <input type="radio" name="language" class="language" value="Afri">
           <span class="label-body">Afrikaans</span>
         </label>
