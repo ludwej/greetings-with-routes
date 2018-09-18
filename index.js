@@ -61,6 +61,8 @@ app.post('/reset', routes.reset)
 
 app.get('/greeted', routes.greeted)
 
+app.post('/back', routes.back)
+
 let PORT = process.env.PORT || 3010
 
 app.listen(PORT, function () {

@@ -1,5 +1,5 @@
 module.exports = function (pool) {
-    let greeting = require('../greet-logic')
+  let greeting = require('../greet-logic')
   let greet = greeting(pool)
 
   async function homeRoute (req, res) {
@@ -75,6 +75,19 @@ module.exports = function (pool) {
     })
   }
 
+  async function back (req, res) {
+    try {
+      let greetedUser = await greet.greetedUser()
+
+      let counter = await greet.countLocal()
+
+      res.render('greeted', {
+        greetedUser,
+        counter
+      })
+    } catch (err) {}
+  }
+
   async function greeted (req, res) {
     try {
       let greetedUser = await greet.greetedUser()
@@ -95,7 +108,8 @@ module.exports = function (pool) {
     home,
     resetDb,
     reset,
-    greeted
+    greeted,
+    back
 
   }
 }
